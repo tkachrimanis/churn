@@ -72,10 +72,10 @@ FROM (SELECT *,
                WHEN seq_con > 1 THEN AVG(ABS(datediff (DAY,con_create_dt,lag_dt)) +1) OVER (PARTITION BY cus_id ORDER BY con_create_dt ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
              END AS seq_avg_days_between,
              CASE
-               WHEN seq_con > 1 THEN AVG(ABS(datediff (DAY,con_create_dt,lag_dt)) +1) OVER (PARTITION BY cus_id ORDER BY con_create_dt ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+               WHEN seq_con > 1 THEN stddev_pop(ABS(datediff (DAY,con_create_dt,lag_dt)) +1) OVER (PARTITION BY cus_id ORDER BY con_create_dt ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
              END AS seq_std_days_between,
              CASE
-               WHEN seq_con > 1 THEN AVG(ABS(datediff (DAY,con_create_dt,lag_dt)) +1) OVER (PARTITION BY cus_id ORDER BY con_create_dt ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+               WHEN seq_con > 1 THEN stddev_pop(ABS(datediff (DAY,con_create_dt,lag_dt)) +1) OVER (PARTITION BY cus_id ORDER BY con_create_dt ROWS BETWEEN 9 PRECEDING AND CURRENT ROW)
              END AS seq_std10_days_between,
              CASE
                WHEN seq_con > 1 THEN MEDIAN (ABS(datediff (DAY,con_create_dt,lag_dt)) +1) OVER (PARTITION BY cus_id)

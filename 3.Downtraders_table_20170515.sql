@@ -665,7 +665,7 @@ GRANT SELECT
   TO public;
 --SELECT COUNT(*), acc_country FROM stg3_list_downtraders_churners_NL_DE_GR_CY_IE group by acc_country;
 -- Print the list
-
+DROP TABLE if exists stg3_customer_list;
 create table stg3_customer_list as 
 select cus_id,
              acc_country,
